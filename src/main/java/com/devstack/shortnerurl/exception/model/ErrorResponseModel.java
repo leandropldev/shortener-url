@@ -1,4 +1,4 @@
-package com.devstack.shortnerurl.exception;
+package com.devstack.shortnerurl.exception.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

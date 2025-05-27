@@ -9,11 +9,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Document(collation = "urls")
+@Document(collection = "urls")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Url {
+public class UrlEntity {
 
     @Id
     private String id;
