@@ -14,6 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 public class UrlController {
 
     private final UrlService urlService;
@@ -24,7 +25,7 @@ public class UrlController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Void> redirectUrl(@PathVariable("id") String id, HttpServletRequest request){
+    public ResponseEntity<Void> redirectUrl(@PathVariable("id") String id){
         String url = urlService.getUrlToBeRedirected(id);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create(url));
