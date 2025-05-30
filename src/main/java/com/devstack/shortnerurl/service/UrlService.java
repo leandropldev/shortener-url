@@ -11,6 +11,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @RequiredArgsConstructor
@@ -22,10 +23,10 @@ public class UrlService {
         do {
           id  =  RandomStringUtils.randomAlphanumeric(5, 10);
         } while (urlRepository.existsById(id));
-        urlRepository.save(new UrlEntity(id, body.url(), LocalDateTime.now().plusDays(1)));
-
+        UrlEntity save = urlRepository.save(new UrlEntity(id, body.url(), LocalDateTime.now().plusDays(1)));
+        String expireAt = save.getExpiresAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         String redirectUrl = request.getRequestURL().toString().replace("shorten-url", id);
-        return new ShorterUrlResponse(redirectUrl);
+        return new ShorterUrlResponse(redirectUrl, expireAt);
     }
 
     public String getUrlToBeRedirected(String id) {
